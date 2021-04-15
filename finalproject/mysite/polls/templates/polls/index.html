@@ -1,0 +1,33 @@
+<! DOCTYPE html>
+<html lang ="en">
+<head>
+    <title>Welcome to This or That!</title>
+    <style>
+      .header {
+  padding: 10px;
+  text-align: center;
+  background: #1abc9c;
+  color: white;
+  font-size: 30px;
+  }
+  </style>
+</head>
+
+<body>
+    <div class ="header">
+        <h1>Welcome to This or That!</h1>
+    </div>
+
+</body>
+
+</html>
+
+{% if latest_question_list %}
+    <ul>
+    {% for question in latest_question_list %}
+        <li><a href="/polls/{{ question.id }}/">{{ question.question_text }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
