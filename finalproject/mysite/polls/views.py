@@ -5,7 +5,7 @@ from django.template import loader
 from .models import Question, Choice, Profile
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
-
+ # switch to class based views!!
 def index(request):
     latest_question_list = Question.objects.order_by('-pub_date')[:5]
     template = loader.get_template('polls/index.html')
