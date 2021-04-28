@@ -7,7 +7,6 @@ from .models import Question, Choice, Profile
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 
- # switch to class based views!!
 class IndexView(View):
     def get(self, request):
         latest_question_list = Question.objects.order_by('-pub_date')[:5]
@@ -19,7 +18,7 @@ class IndexView(View):
         output = ', '.join([q.question_text for q in latest_question_list])
         return HttpResponse(template.render(context, request))
 
-# Create your views here.
+
 class DetailView(View):
     def get(self, request):
         return HttpResponse("Your're looking at question %s." % question_id)

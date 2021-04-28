@@ -1,0 +1,26 @@
+<!-- templates/registration/login.html -->
+<! DOCTYPE html>
+<html lang='english'>
+<head>
+
+<h2>Log In</h2>
+
+</head>
+<body>
+  <form method="post">
+    <div class="container">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <label for="Username">Username</label>
+      <input type="text" class="form-control" name="username" id="username" />
+    </div>
+    <div class="container">
+      <label for="Password">Password</label>
+      <input type="password" class="form-control" name="password" id="password" />
+    </div>
+
+      <button type="submit">Log In</button>
+    </form>
+  </body
+
+</html?
