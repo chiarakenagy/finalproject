@@ -1,26 +1,45 @@
-<!-- templates/registration/login.html -->
+<!-- templates/registration/user.html -->
 <! DOCTYPE html>
 <html lang='english'>
 <head>
+  <style>
+    .header {
+padding: 10px;
+text-align: center;
+background: #1abc9c;
+color: white;
+font-size: 30px;
+}
+</style>
 
-<h2>Log In</h2>
+
 
 </head>
 <body>
+  <div class ="header">
+      <h1>Welcome to This or That!</h1>
+  </div>
+  <h2>Log In</h2>
   <form method="post">
-    <div class="container">
-      {% csrf_token %}
-      {{ form.as_p }}
+        {% csrf_token %}
+              {{ form.as_p }}
+
+    <div class="form-group">
+
       <label for="Username">Username</label>
-      <input type="text" class="form-control" name="username" id="username" />
+      <input type="text" class="form-control" name="inputUsername" id="inputUsername" />
     </div>
-    <div class="container">
+    <div class="form-group">
       <label for="Password">Password</label>
-      <input type="password" class="form-control" name="password" id="password" />
+      <input type="password" class="form-control" name="inputPassword" id="inputPassword" />
     </div>
 
-      <button type="submit">Log In</button>
+      <button type="submit" class="btn btn-danger">Log In</button>
     </form>
+    <p> Haven't set up an account yet? </p>
+    <a href="accounts/signup/" >
+      <button type="makeAccount">Make Account!</button>
+    </a>
   </body
 
-</html?
+</html>
