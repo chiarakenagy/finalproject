@@ -17,6 +17,16 @@ class IndexView(View):
         }
         output = ', '.join([q.question_text for q in latest_question_list])
         return HttpResponse(template.render(context, request))
+    def post(self, request):
+        latest_question_list = Question.objects.order_by('-pub_date')[:5]
+        template = loader.get_template('polls/index.html')
+        context = {
+            'latest_question_list':
+        latest_question_list,
+        }
+        output = ', '.join([q.question_text for q in latest_question_list])
+        return HttpResponse(template.render(context, request))
+        # can treat the def post differently - coming from a form - welcome message, check if user is logged in
 
 
 class DetailView(View):
@@ -35,7 +45,7 @@ class VotingView(View):
             selected_choice = question.choice_set.get(pk = request.POST['choice'])
         except (KeyError, Choice.DoesNotExist):
             # Redisplay the question voting form.
-            return render(request, 'polls / detail.html', {
+            return render(request, 'polls / index.html', {
                 'question': question,
                 'error_message': "You didn't select a choice.",
             })

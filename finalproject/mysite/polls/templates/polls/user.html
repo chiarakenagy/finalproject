@@ -20,7 +20,7 @@ font-size: 30px;
       <h1>Welcome to This or That!</h1>
   </div>
   <h2>Log In</h2>
-  <form method="post">
+  <form method="post" action= "polls/">
         {% csrf_token %}
               {{ form.as_p }}
 
@@ -35,6 +35,7 @@ font-size: 30px;
     </div>
 
       <button type="submit" class="btn btn-danger">Log In</button>
+
     </form>
     <p> Haven't set up an account yet? </p>
     <a href="accounts/signup/" >
