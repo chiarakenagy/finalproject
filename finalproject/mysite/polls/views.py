@@ -14,16 +14,31 @@ class IndexView(View):
         context = {
             'latest_question_list':
         latest_question_list,
+            'user': request.user,
         }
         output = ', '.join([q.question_text for q in latest_question_list])
         return HttpResponse(template.render(context, request))
     def post(self, request):
+        if request.POST:
+            if 'inputUsername' in request.POST.keys():
+                user = authenticate(username=request.POST['inputUsername'],
+                    password=request.POST['inputPassword'])
+                if user is not None:
+                    login(request,user)
+                else:
+                    pass
+            elif 'logout' in request.POST.keys():
+                logout(request)
+        loggedIn = request.user.is_authenticated
+
         latest_question_list = Question.objects.order_by('-pub_date')[:5]
         template = loader.get_template('polls/index.html')
         context = {
-            'latest_question_list':
-        latest_question_list,
+            'latest_question_list': latest_question_list,
+            'loggedIn': loggedIn,
+            'user': request.user,
         }
+
         output = ', '.join([q.question_text for q in latest_question_list])
         return HttpResponse(template.render(context, request))
         # can treat the def post differently - coming from a form - welcome message, check if user is logged in
@@ -48,6 +63,7 @@ class VotingView(View):
             return render(request, 'polls / index.html', {
                 'question': question,
                 'error_message': "You didn't select a choice.",
+                'user': request.user,
             })
         else:
             selected_choice.votes += 1

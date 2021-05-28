@@ -18,17 +18,30 @@
         <h1>This or That: Voting Center</h1>
     </div>
 
-</body>
 
-</html>
+
+{% block content %}
+{% if user.is_authenticated %}
+  <h2> Hi {{ user.first_name }}! </h2>
+  <p><a href="{% url 'logout' %}">Log Out</a></p>
+{% else %}
+  <p>You are not logged in</p>
+{% endif %}
+{% endblock %}
 
 
 {% if latest_question_list %}
     <ul>
     {% for question in latest_question_list %}
+    <div class="row border border-dark">
         <li><a href="/polls/{{ question.id }}/">{{ question.question_text }}</a></li>
+      </div>
     {% endfor %}
     </ul>
 {% else %}
     <p>No polls are available.</p>
 {% endif %}
+
+</body>
+
+</html>
