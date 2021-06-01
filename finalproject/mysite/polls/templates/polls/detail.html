@@ -8,6 +8,19 @@
     <div>
       <h1> Welcome to the Voting Center!</h1>
     </div>
+      <form method="POST" >
+        {{ question.question_text }}
+        <br/>
+        {% for choice in choices %}
+        <input type="radio" name="pollChoices" value="{{ choice.id }}"> {{ choice.choice_text }}</input>
+        <br/>
+        {% endfor %}
+
+        <button type="submit" name="submit" > Submit Answer to See Results </button>
+          {% csrf_token %}
+
+
+      </form>
 
   </body>
 

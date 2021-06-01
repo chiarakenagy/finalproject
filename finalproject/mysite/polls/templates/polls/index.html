@@ -33,14 +33,21 @@
 {% if latest_question_list %}
     <ul>
     {% for question in latest_question_list %}
-    <div class="row border border-dark">
+
         <li><a href="/polls/{{ question.id }}/">{{ question.question_text }}</a></li>
-      </div>
     {% endfor %}
     </ul>
 {% else %}
     <p>No polls are available.</p>
 {% endif %}
+
+<form method="POST" >
+  <input type="text" name="question" ></input>
+  <input type="text" name="choice1" ></input>
+  <input type="text" name="choice2" ></input>
+  <button type="submit" name="submit" > Submit New Question </button>
+  {% csrf_token %}
+</form>
 
 </body>
 
