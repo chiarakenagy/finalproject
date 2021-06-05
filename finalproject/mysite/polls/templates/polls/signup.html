@@ -6,6 +6,8 @@
   <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
+    <input type='text' name='first_name'></input>
+    <input type='text' name='last_name'></input
     <button type="submit">Sign Up</button>
   </form>
 {% endblock %}

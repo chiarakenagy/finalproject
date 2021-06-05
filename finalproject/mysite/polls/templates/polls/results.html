@@ -5,6 +5,18 @@
 
   </head>
   <body>
+    <div>
+      <h1> Poll Results </h1>
+    </div>
+    <div>
+
+    {% for choice in choices %} 
+    {{ choice.choice_text }}
+    <br/>
+    {{ choice.votes }}
+    <br/>
+    {% endfor %}
+    </div>
 
   </body>
 

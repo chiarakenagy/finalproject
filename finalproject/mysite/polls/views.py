@@ -7,10 +7,12 @@ from .models import Question, Choice, Profile
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 
+# view for index.html
 class IndexView(View):
     def get(self, request):
-        latest_question_list = Question.objects.order_by('-pub_date')[:5]
-        template = loader.get_template('polls/index.html')
+        # get view - not coming from a form
+        latest_question_list = Question.objects.order_by('-pub_date')[:5] #order by date pub
+        template = loader.get_template('polls/index.html') #load template
         context = {
             'latest_question_list':
         latest_question_list,
@@ -19,6 +21,8 @@ class IndexView(View):
         output = ', '.join([q.question_text for q in latest_question_list])
         return HttpResponse(template.render(context, request))
     def post(self, request):
+         # view from submitted form
+         # set up different response wether user is logged in or not
         if request.POST:
             if 'inputUsername' in request.POST.keys():
                 user = authenticate(username=request.POST['inputUsername'],
@@ -31,6 +35,7 @@ class IndexView(View):
                 logout(request)
         loggedIn = request.user.is_authenticated
 
+        # set up system for saving questions
         if "question" in request.POST.keys():
             question = Question(
                 question_text = request.POST["question"],
@@ -71,6 +76,7 @@ class ResultsView(View):
         return HttpResponse(response % question_id)
 
 class DetailView(View):
+    #view questions and vote on them view
     def get(self, request, question_id):
         question = get_object_or_404(Question, pk = question_id)
         try:
@@ -92,6 +98,7 @@ class DetailView(View):
 
 
         }
+        print(context)
         return render(request, "polls/detail.html", context)
     def post(self, request, question_id):
         if "pollChoices" in request.POST:
